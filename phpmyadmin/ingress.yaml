@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: phpmyadmin-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - phpmyadmin.torresj.com
+    secretName: phpmyadmin-secret
+  rules:
+  - host: phpmyadmin.torresj.com
+    http:
+      paths:
+      - backend:
+          serviceName: unseen-db-ui-phpmyadmin
+          servicePort: 80
