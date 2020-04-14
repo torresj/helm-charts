@@ -39,3 +39,8 @@ Useful Helm Client Commands:
 * View available charts: `helm search repo`
 * Install a chart: `helm install --name my-release torresj/<package-name>`
 * Upgrade your application: `helm upgrade`
+
+### Helm list
+
+Application added to helm repository:
+* [Cloud Config](https://github.com/torresj/helm-charts/tree/master/cloud-config): [Spring cloud config server](https://cloud.spring.io/spring-cloud-config/reference/html/)
