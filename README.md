@@ -43,4 +43,4 @@ Useful Helm Client Commands:
 ### Helm list
 
 Application added to helm repository:
-* [Cloud Config](https://github.com/torresj/helm-charts/tree/master/cloud-config): [Spring cloud config server](https://cloud.spring.io/spring-cloud-config/reference/html/)
+* [Cloud Config](https://github.com/torresj/helm-charts/tree/master/cloud-config): A cloud configuration server based on [Spring cloud config server](https://cloud.spring.io/spring-cloud-config/reference/html/)
