@@ -7,7 +7,6 @@ Tip:
 Get the application URL by running these commands:
 {{- if .Values.ingress.enabled }}
   http{{ if .Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.host }}
-{{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "cloud-config.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
@@ -26,4 +25,5 @@ Get the application URL by running these commands:
 To get server credentials:
    
    * User     => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.username}" | base64 --decode
-   * Password => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.password}" | base64 --decode
+   * Password => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.password}" | base64 --decod
+
