@@ -52,7 +52,7 @@ The following tables lists the configurable parameters of the MySQL chart and th
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
 | `image.repository`                          | Cloud config Image repository                                                                                                                                                                                                                                  | `torresj/cloud-config`                                                   |
 | `image.name`                                | Cloud config Image name                                                                                                                                                                                                                                        | `spring-cloud-config-server`                                                   |
-| `image.version`                             | Cloud config Image name                                                                                                                                                                                                                                        | Current latest version `0.1.3`                                                   |
+| `image.version`                             | Cloud config Image version                                                                                                                                                                                                                                        | Current latest version `0.1.3`                                                   |
 | `image.pullPolicy`                          | Cloud config image pull policy                                                                                                                                                                                                                                 | `IfNotPresent`                                                   |
 | `nameOverride`                              | String to partially override cloud-config.fullname template with a string (will prepend the release name)                                                                                                                                                             | `nil`                                                             |
 | `fullnameOverride`                          | String to fully override cloud-config.fullname template with a string                                                                                                                                                                                                 | `nil` 
@@ -71,3 +71,21 @@ The following tables lists the configurable parameters of the MySQL chart and th
 | `ingress.path`                                    | Ingress path                                                                                                                                                                                                                            | `/`                                                    | 
 | `ingress.tls.enabled`                                    | Enable tls for K8s ingress                                                                                                                                                                                                                           | `false`                                                    |
 | `ingress.tls.cert_manager.cluster_issuer`                                    | Cluster issuer to be used with cert manager                                                                                                                                                                                                                            | `nil`                                                    |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
+
+```bash
+$ helm install --name my-release \
+  --set git.uri=https://github.com/spring-cloud-examples \
+    torresj/cloud-config
+```
+
+The above command sets the git repository to `https://github.com/spring-cloud-examples`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```bash
+$ helm install my-release -f values.yaml torresj/cloud-config
+```
+
+> **Tip**: You can use the default [values.yaml](values.yaml)
