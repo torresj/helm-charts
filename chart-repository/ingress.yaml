@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: chartmuseum-ingress
+  namespace: repos
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -15,5 +16,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: good-aardvark-chartmuseum
+          serviceName: chart-repo-chartmuseum
           servicePort: 8080
