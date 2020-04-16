@@ -37,7 +37,7 @@ spec:
                   key: password
             {{ if .Values.telegram.enabled -}}
             - name: TELEGRAM_NOTIFICATIONS
-              value: {{ .Values.telegram.enabled }}
+              value: "true"
             - name: TELEGRAM_TOKEN
               valueFrom:
                 secretKeyRef:
