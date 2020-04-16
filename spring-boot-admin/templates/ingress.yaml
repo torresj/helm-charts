@@ -1,0 +1,28 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ include "spring-boot-admin.fullname" . }}
+  labels:
+{{ include "spring-boot-admin.labels" . | indent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: {{ .Values.ingress.controller.class }}
+    {{ if .Values.ingress.tls.cert_manager.cluster_issuer -}}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.cert_manager.cluster_issuer }}
+    {{- end }}
+spec:
+  {{ if .Values.ingress.tls.enabled -}}
+  tls:
+  - hosts: 
+    - {{ .Values.ingress.host | quote }}
+    secretName: {{include "spring-boot-admin.fullname" .}}-tls-secret
+  {{- end }}
+  rules:
+    - host: {{ .Values.ingress.host | quote }}
+      http:
+        paths:
+        - path: {{ .Values.ingress.path }}
+          backend:
+            serviceName: {{ include "spring-boot-admin.fullname" . }}
+            servicePort: {{ .Values.service.port }}
+{{- end }}

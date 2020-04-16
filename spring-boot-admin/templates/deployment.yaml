@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spring-boot-admin.fullname" . }}
+  labels:
+{{ include "spring-boot-admin.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "spring-boot-admin.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "spring-boot-admin.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-admin-secret
+                  key: username
+            - name: USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-admin-secret
+                  key: password
+            {{ if .Values.telegram.enabled -}}
+            - name: TELEGRAM_NOTIFICATIONS
+              value: {{ .Values.telegram.enabled }}
+            - name: TELEGRAM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-secret
+                  key: token
+            - name: TELEGRAM_CHAT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-secret
+                  key: chat-id
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

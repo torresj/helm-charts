@@ -1,0 +1,40 @@
+# Default values for spring-boot-admin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: torresjb
+  name: spring-boot-admin
+  version: 0.1.2
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+admin:
+  user: user
+  password: password
+
+telegram:
+  enabled: false
+  chat:
+  token:
+
+
+ingress:
+  enabled: false
+  controller:
+    class: nginx
+  host: spring-boot-admin.local
+  path: /
+  tls:
+    enabled: false
+    cert_manager:
+      cluster_issuer:
