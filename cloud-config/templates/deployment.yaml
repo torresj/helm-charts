@@ -52,6 +52,8 @@ spec:
                   key: password
             {{- end }}
             {{ if .Values.spring.boot.admin.enabled -}}
+            - name: SPRING_BOOT_ADMIN_ENABLED
+              value: "true"
             - name: SPRING_BOOT_ADMIN_URL
               value: {{ .Values.spring.boot.admin.url }}
             - name: SPRING_BOOT_ADMIN_USERNAME
