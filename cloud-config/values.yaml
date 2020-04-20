@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: torresjb
   name: spring-cloud-config-server
-  version: 0.1.6
+  version: 0.1.7
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
