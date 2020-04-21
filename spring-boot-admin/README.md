@@ -137,8 +137,9 @@ $ helm install my-release -f values.yaml torresj/spring-boot-admin
 ## Spring cloud config properties
 
 Example of `spring-boot-admin-server.yml`:
-	spring:  
-	    #Spring security credentials
+	
+	#Spring security credentials
+	spring:
 	    security:
 	      user:
 	        name: USER
