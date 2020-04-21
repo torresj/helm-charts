@@ -44,6 +44,50 @@ $ helm delete my-release --purge
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Docker image
+
+This chart use by default a custom docker image [spring-cloud-config-server](https://hub.docker.com/repository/docker/torresjb/spring-cloud-config-server) published in [docker hub](https://hub.docker.com/). This image has the following environment variables:
+
+**`APP_VERSION`**
+
+This variable is mandatory and set the spring cloud config server version. 
+
+**`USER_NAME`**
+
+This variable is mandatory and set the spring security user to connect with server.
+
+**`USER_PASSWORD`**
+
+This variable is mandatory and set the spring security password to connect with server.
+
+**`GIT_URI`**
+
+This variable is mandatory and set git repository to get configurations.
+
+**`GIT_USER`**
+
+This variable set git user. It is mandatory if git repository is private.
+
+**`GIT_PASSWORD`**
+
+This variable set git password. It is mandatory if git repository is private.
+
+**`SPRING_BOOT_ADMIN_ENABLED`**
+
+Variable to enable connect with a spring boot admin server. Defaul value is `false`.
+
+**`SPRING_BOOT_ADMIN_URL`**
+
+If spring boot admin server is enabled, it is mandatory set the url of the server.
+
+**`SPRING_BOOT_ADMIN_USERNAME`**
+
+If spring boot admin server is enabled, it is mandatory set the username to connect with admin server.
+
+**`SPRING_BOOT_ADMIN_USERNAME`**
+
+If spring boot admin server is enabled, it is mandatory set the password to connect with admin server.
+
 ## Parameters
 
 The following tables lists the configurable parameters of the cloud config chart and their default values.
