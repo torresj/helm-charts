@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: torresjb
   name: spring-boot-admin
-  version: 0.1.2
+  version: 0.2.3
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -18,8 +18,15 @@ service:
   type: ClusterIP
   port: 8080
 
+cloud:
+  config:
+    enabled: false
+    url:
+    username:
+    password:
+
 admin:
-  user: user
+  username: user
   password: password
 
 telegram:

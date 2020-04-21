@@ -25,6 +25,24 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
+            {{ if .Values.cloud.config.enabled -}}
+            - name: SPRING_CLOUD_CONFIG_ENABLED
+              value: "true"
+            - name: SPRING_CLOUD_CONFIG_URL
+              value: {{ .Values.cloud.config.url }}
+            - name: SPRING_CLOUD_CONFIG_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-admin-cloud-config-secret
+                  key: username
+            - name: USPRING_CLOUD_CONFIG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: spring-boot-admin-cloud-config-secret
+                  key: password
+            {{- else }}
+            - name: SPRING_CLOUD_CONFIG_ENABLED
+              value: "false"
             - name: USER_NAME
               valueFrom:
                 secretKeyRef:
@@ -48,6 +66,7 @@ spec:
                 secretKeyRef:
                   name: telegram-secret
                   key: chat-id
+            {{- end }}
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
