@@ -86,7 +86,7 @@ This variable is mandatory if `TELEGRAM_TOKEN` = `true`. Set the telegram chat i
 
 ## Parameters
 
-The following tables lists the configurable parameters of the cloud config chart and their default values.
+The following tables lists the configurable parameters of the spring boot admin chart and their default values.
 
 | Parameter                                   | Description                                                                                                                                                                                                                                                    | Default                                                           |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -110,6 +110,10 @@ The following tables lists the configurable parameters of the cloud config chart
 | `ingress.path`                                    | Ingress path                                                                                                                                                                                                                            | `/`                                                    | 
 | `ingress.tls.enabled`                                    | Enable tls for K8s ingress                                                                                                                                                                                                                           | `false`                                                    |
 | `ingress.tls.cert_manager.cluster_issuer`                                    | Cluster issuer to be used with cert manager                                                                                                                                                                                                                            | `nil`                                                    |
+| `cloud.config.enabled`                                    | Enable get properties from config server instead of environment variables                                                                                                                                                                                                                           | `false`                                                    |
+| `cloud.config.url`                                    | mandatory if `cloud.config.enabled` = `true`. Cloud config server url                                                                                                                                                                                                                           | `nil`                                                    |
+| `cloud.config.username`                                    | mandatory if `cloud.config.enabled` = `true`. Cloud config server username                                                                                                                                                                                                                         | `nil`                                                    |
+| `cloud.config.password`                                    | mandatory if `cloud.config.enabled` = `true`. Cloud config server password                                                                                                                                                                                                                           | `nil`                                                    |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
@@ -129,3 +133,30 @@ $ helm install my-release -f values.yaml torresj/spring-boot-admin
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
+
+## Spring cloud config properties
+
+Example of `spring-boot-admin-server.yml`:
+	spring:  
+	    #Spring security credentials
+	    security:
+	      user:
+	        name: USER
+	        password: PASSWORD
+	  
+	    #configs to give secured server info
+	    boot:
+	      admin:
+	        client:
+	          instance:
+	            metadata:
+	              user:
+	                name: ${spring.security.user.name}
+	                password: ${spring.security.user.password}
+	        #Telegram notifications
+	        notify:
+	          custom:
+	            telegram:
+	              enabled: true
+	              auth-token: 12345678:ABCDEFGHIJKLMNOPQRSTW
+	              chat-id: 111111
