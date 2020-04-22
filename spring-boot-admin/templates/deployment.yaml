@@ -33,12 +33,12 @@ spec:
             - name: SPRING_CLOUD_CONFIG_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: spring-boot-admin-cloud-config-secret
+                  name: spring-config-secret
                   key: username
-            - name: USPRING_CLOUD_CONFIG_PASSWORD
+            - name: SPRING_CLOUD_CONFIG_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: spring-boot-admin-cloud-config-secret
+                  name: spring-config-secret
                   key: password
             {{- else }}
             - name: SPRING_CLOUD_CONFIG_ENABLED
