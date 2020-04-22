@@ -44,3 +44,4 @@ Useful Helm Client Commands:
 
 Application added to helm repository:
 * [Cloud Config](https://github.com/torresj/helm-charts/tree/master/cloud-config): A cloud configuration server based on [Spring cloud config server](https://cloud.spring.io/spring-cloud-config/reference/html/).
+* [Spring boot admin](https://github.com/torresj/helm-charts/tree/master/spring-boot-admin): An admin dashboard to manage spring boot applications based on [Spring boot admin](https://codecentric.github.io/spring-boot-admin/current/).
