@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: chartmuseum-ingress
-  namespace: repos
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -10,7 +9,7 @@ spec:
   tls:
   - hosts:
     - charts.torresj.com
-    secretName: chartmuseum-secret
+    secretName: chartmuseum-secret-tls
   rules:
   - host: charts.torresj.com
     http:
