@@ -66,7 +66,7 @@ spec:
                 secretKeyRef:
                   name: spring-admin-secret
                   key: password
-            {{ if .Values.spring.boot.admin.enabled -}}
+            {{ if .Values.ingress.enabled -}}
             - name: BASE_URL
               value: http{{ if .Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.host }}
             {{- end }} 

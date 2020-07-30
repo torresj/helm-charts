@@ -25,5 +25,5 @@ Get the application URL by running these commands:
 To get server credentials:
    
    * User     => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.username}" | base64 --decode
-   * Password => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.password}" | base64 --decod
+   * Password => kubectl get secret --namespace {{ .Release.Namespace }} cloud-config-secret -o jsonpath="{.data.password}" | base64 --decode
 
