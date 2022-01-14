@@ -7,18 +7,16 @@ Cloud config server based on [Spring cloud config server](https://cloud.spring.i
 ```bash
 $ helm repo add torresj https://charts.torresj.com
 $ helm install my-release torresj/cloud-config
-``` 
+```
 
 ## Introduction
 
 This chart bootstraps a [Spring cloud config server](https://cloud.spring.io/spring-cloud-config/reference/html/) replication deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-
 ## Prerequisites
 
 - Kubernetes 1.18+
 - Helm 2.16+ or Helm 3.0-beta3+
-
 
 ## Installing the Chart
 
@@ -32,7 +30,6 @@ $ helm install my-release torresj/cloud-config
 These commands deploy cloud config server on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
-
 
 ## Uninstalling the Chart
 
@@ -50,7 +47,7 @@ This chart use by default a custom docker image [spring-cloud-config-server](htt
 
 **`APP_VERSION`**
 
-This variable is mandatory and set the spring cloud config server version. 
+This variable is mandatory and set the spring cloud config server version.
 
 **`USER_NAME`**
 
@@ -63,6 +60,10 @@ This variable is mandatory and set the spring security password to connect with 
 **`GIT_URI`**
 
 This variable is mandatory and set git repository to get configurations.
+
+**`GIT_LABEL`**
+
+This variable is optional and set git repository label. Default value is `main`.
 
 **`GIT_USER`**
 
@@ -92,33 +93,34 @@ If spring boot admin server is enabled, it is mandatory set the password to conn
 
 The following tables lists the configurable parameters of the cloud config chart and their default values.
 
-| Parameter                                   | Description                                                                                                                                                                                                                                                    | Default                                                           |
-|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| `image.repository`                          | Cloud config Image repository                                                                                                                                                                                                                                  | `torresj/cloud-config`                                                   |
-| `image.name`                                | Cloud config Image name                                                                                                                                                                                                                                        | `spring-cloud-config-server`                                                   |
-| `image.version`                             | Cloud config Image version                                                                                                                                                                                                                                        | Current latest version `0.1.3`                                                   |
-| `image.pullPolicy`                          | Cloud config image pull policy                                                                                                                                                                                                                                 | `IfNotPresent`                                                   |
-| `nameOverride`                              | String to partially override cloud-config.fullname template with a string (will prepend the release name)                                                                                                                                                             | `nil`                                                             |
-| `fullnameOverride`                          | String to fully override cloud-config.fullname template with a string                                                                                                                                                                                                 | `nil` 
-| `replicaCount`                              | K8s replicas                                                                                                                       | `IfNotPresent`                                                   |
-| `service.type`                               | K8s service type                                                                                                                                                                                                                                 | `ClusterIP`                                                   |
-| `service.port`                               | K8s service port                                                                                                                                                                                                                                 | `8888`                                                   |
-| `config.server.username`                         | Cloud config server user for http request                                                                                                                                                                                                                                | `user`
-| `config.server.password`                     | Cloud config server password for http request                                                                                                                                                                                                                               | `password`                                                   |
-| `git.credentials.enabled`                     | If git repository is private, git credentials are required                                                                                                                                                                                                                              | `false`                                                   |
-| `git.user`                                    | Git user required if `git.credentials.enabled`=`true`                                                                                                                                                                                                                             | `nil`                                                    |
-| `git.password`                                    | Git password required if `git.credentials.enabled`=`true`                                                                                                                                                                                                                             | `nil`                                                    |
-| `git.uri`                                    | Git uri repo with configuration files                                                                                                                                                                                                                            | `https://github.com/spring-cloud-samples/config-repo`                                                    |
-| `spring.boot.admin.enabled`                     | true for enable connecting to spring boot admin server                                                                                                                                                                                                                             | `false`                                                   |
-| `spring.boot.admin.username`                                    | Spring boot admin user required if `spring.boot.admin.enabled`=`true`                                                                                                                                                                                                                             | `nil`                                                    |
-| `spring.boot.admin.password`                                    | Spring boot admin password required if `spring.boot.admin.enabled`=`true`                                                                                                                                                                                                                             | `nil`                                                    |
-| `spring.boot.admin.url`                                    | Spring boot admin url required if `spring.boot.admin.enabled`=`true`                                                                                                                                                                                                                            | `nil`                                                    |
-| `ingress.enabled`                                    | Enable K8s ingress                                                                                                                                                                                                                            | `false`                                                    |
-| `ingress.controller.class`                       | Ingress controller class                                                                                                                                                                                                                             | `nginx`                                                    |
-| `ingress.host`                                    | Ingress host                                                                                                                                                                                                                            | `cloud-config.local`                                                    |
-| `ingress.path`                                    | Ingress path                                                                                                                                                                                                                            | `/`                                                    | 
-| `ingress.tls.enabled`                                    | Enable tls for K8s ingress                                                                                                                                                                                                                           | `false`                                                    |
-| `ingress.tls.cert_manager.cluster_issuer`                                    | Cluster issuer to be used with cert manager                                                                                                                                                                                                                            | `nil`                                                    |
+| Parameter                                 | Description                                                                                               | Default                                               |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `image.repository`                        | Cloud config Image repository                                                                             | `torresj/cloud-config`                                |
+| `image.name`                              | Cloud config Image name                                                                                   | `spring-cloud-config-server`                          |
+| `image.version`                           | Cloud config Image version                                                                                | Current latest version `0.1.3`                        |
+| `image.pullPolicy`                        | Cloud config image pull policy                                                                            | `IfNotPresent`                                        |
+| `nameOverride`                            | String to partially override cloud-config.fullname template with a string (will prepend the release name) | `nil`                                                 |
+| `fullnameOverride`                        | String to fully override cloud-config.fullname template with a string                                     | `nil`                                                 |
+| `replicaCount`                            | K8s replicas                                                                                              | `IfNotPresent`                                        |
+| `service.type`                            | K8s service type                                                                                          | `ClusterIP`                                           |
+| `service.port`                            | K8s service port                                                                                          | `8888`                                                |
+| `config.server.username`                  | Cloud config server user for http request                                                                 | `user`                                                |
+| `config.server.password`                  | Cloud config server password for http request                                                             | `password`                                            |
+| `git.credentials.enabled`                 | If git repository is private, git credentials are required                                                | `false`                                               |
+| `git.user`                                | Git user required if `git.credentials.enabled`=`true`                                                     | `nil`                                                 |
+| `git.password`                            | Git password required if `git.credentials.enabled`=`true`                                                 | `nil`                                                 |
+| `git.uri`                                 | Git uri repo with configuration files                                                                     | `https://github.com/spring-cloud-samples/config-repo` |
+| `git.label`                               | Git label                                                                                                 | `main`                                                |
+| `spring.boot.admin.enabled`               | true for enable connecting to spring boot admin server                                                    | `false`                                               |
+| `spring.boot.admin.username`              | Spring boot admin user required if `spring.boot.admin.enabled`=`true`                                     | `nil`                                                 |
+| `spring.boot.admin.password`              | Spring boot admin password required if `spring.boot.admin.enabled`=`true`                                 | `nil`                                                 |
+| `spring.boot.admin.url`                   | Spring boot admin url required if `spring.boot.admin.enabled`=`true`                                      | `nil`                                                 |
+| `ingress.enabled`                         | Enable K8s ingress                                                                                        | `false`                                               |
+| `ingress.controller.class`                | Ingress controller class                                                                                  | `nginx`                                               |
+| `ingress.host`                            | Ingress host                                                                                              | `cloud-config.local`                                  |
+| `ingress.path`                            | Ingress path                                                                                              | `/`                                                   |
+| `ingress.tls.enabled`                     | Enable tls for K8s ingress                                                                                | `false`                                               |
+| `ingress.tls.cert_manager.cluster_issuer` | Cluster issuer to be used with cert manager                                                               | `nil`                                                 |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 

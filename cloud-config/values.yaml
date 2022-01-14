@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: torresjb
   name: spring-cloud-config-server
-  version: 0.1.8
+  version: 1.0.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -23,20 +23,13 @@ config:
     username: user
     password: password
 
-spring:
-  boot:
-    admin:
-      enabled: false
-      url:
-      username:
-      password:
-
 git:
   credentials:
     enabled: false
   user: user
   password: password
   uri: https://github.com/spring-cloud-samples/config-repo
+  label: main
 
 ingress:
   enabled: false

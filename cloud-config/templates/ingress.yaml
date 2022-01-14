@@ -6,11 +6,11 @@ metadata:
   labels:
 {{ include "cloud-config.labels" . | indent 4 }}
   annotations:
-    kubernetes.io/ingress.class: {{ .Values.ingress.controller.class }}
     {{ if .Values.ingress.tls.cert_manager.cluster_issuer -}}
     cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.cert_manager.cluster_issuer }}
     {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.controller.class }}
   {{ if .Values.ingress.tls.enabled -}}
   tls:
   - hosts: 
@@ -22,7 +22,10 @@ spec:
       http:
         paths:
         - path: {{ .Values.ingress.path }}
+          pathType: Prefix
           backend:
-            serviceName: {{ include "cloud-config.fullname" . }}
-            servicePort: {{ .Values.service.port }}
+            service:
+              name: {{ include "cloud-config.fullname" . }}
+              port:
+                number: {{ .Values.service.port }}
 {{- end }}

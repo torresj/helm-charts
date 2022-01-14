@@ -39,6 +39,8 @@ spec:
                   key: password
             - name: GIT_URI
               value: {{ .Values.git.uri }}
+            - name: GIT_LABEL
+              value: {{ .Values.git.label }}
             {{ if .Values.git.credentials.enabled -}}
             - name: GIT_USER
               valueFrom:
@@ -51,26 +53,5 @@ spec:
                   name: git-secret
                   key: password
             {{- end }}
-            {{ if .Values.spring.boot.admin.enabled -}}
-            - name: SPRING_BOOT_ADMIN_ENABLED
-              value: "true"
-            - name: SPRING_BOOT_ADMIN_URL
-              value: {{ .Values.spring.boot.admin.url }}
-            - name: SPRING_BOOT_ADMIN_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: spring-admin-secret
-                  key: username
-            - name: SPRING_BOOT_ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: spring-admin-secret
-                  key: password
-            {{ if .Values.ingress.enabled -}}
-            - name: BASE_URL
-              value: http{{ if .Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.host }}
-            {{- end }} 
-            {{- end }}
-
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
